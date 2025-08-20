@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - Thetredinghub</title>
+  <meta name="description" content="View and manage your shopping cart on Thetredinghub.">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .cart-item { 
+      background:#fff; 
+      padding:1em; 
+      margin-bottom:1em; 
+      border-radius:0.5em; 
+    }
+    .cart-item button { margin:0 0.3em; }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <a href="/">Home</a>
+  <a href="/products">Products</a>
+  <a href="/wishlist">Wishlist</a>
+  <a href="/cart" class="active">Cart</a>
+  <a href="/checkout">Checkout</a>
+</nav>
+
+<!-- Breadcrumb -->
+<p style="padding: 1em; background: #eee; margin: 0;">Home > Cart</p>
+
+<h2 style="text-align:center;">Your Cart</h2>
+
+<div id="cart-items" style="padding:1em;"></div>
+<h3 id="cart-total" style="text-align:center;"></h3>
+
+<!-- Coupon -->
+<div style="text-align:center; margin: 1em;">
+  <input type="text" id="coupon" placeholder="Enter coupon code">
+  <button onclick="applyCoupon()">Apply Coupon</button>
+</div>
+
+<!-- Buttons -->
+<div style="text-align:center; margin-bottom:2em;">
+  <button onclick="clearCart()">Clear Cart</button>
+  <a href="/checkout" class="btn">Proceed to Checkout</a>
+</div>
+
+<script>
+  // ----------- INITIALIZE FROM SERVER -----------
+  let cart = <%- JSON.stringify(cart || []) %>;
+  let discount = 0;
+
+  // Prefer LocalStorage if present (persistence after reload)
+  let storedCartData = localStorage.getItem('cart');
+  if (storedCartData) {
+    try { cart = JSON.parse(storedCartData); } catch(e) { console.error(e); }
+  }
+
+  // =====================
+  // RENDER CART
+  // =====================
+  function showCart() {
+    let html = '', total = 0;
+    if (!cart.length) {
+      html = '<p>Your cart is empty.</p>';
+      document.getElementById('cart-total').innerText = '';
+    } else {
+      html = '<ul style="list-style:none;padding:0;">';
+      cart.forEach((item, idx) => {
+        let itemTotal = item.price * item.qty;
+        total += itemTotal;
+        html += `
+          <li class="cart-item">
+            <strong>${item.title || item.name}</strong> - ₹${item.price}
+            <button onclick="changeQty(${idx}, -1)">−</button>
+            ${item.qty}
+            <button onclick="changeQty(${idx}, 1)">+</button>
+            = ₹${itemTotal.toFixed(2)}
+            <button onclick="removeItem(${idx})" style="background:red;color:#fff;border:none;border-radius:4px;padding:0.2em 0.5em;">Remove</button>
+          </li>`;
+      });
+      html += '</ul>';
+      let finalTotal = total - (total * discount / 100);
+      let discText = discount > 0 ? ` (Discount ${discount}% Applied)` : '';
+      document.getElementById('cart-total').innerText =
+        "Total: ₹" + finalTotal.toFixed(2) + discText;
+    }
+    document.getElementById('cart-items').innerHTML = html;
+  }
+
+  // =====================
+  // CART ACTIONS
+  // =====================
+  function changeQty(index, change) {
+    cart[index].qty += change;
+    if (cart[index].qty <= 0) cart.splice(index, 1);
+    syncCart();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    syncCart();
+  }
+
+  function clearCart() {
+    cart = [];
+    syncCart();
+  }
+
+  function applyCoupon() {
+    const code = document.getElementById('coupon').value.trim();
+    if (code === "SAVE10") {
+      discount = 10;
+      alert("Coupon applied! 10% discount");
+    } else {
+      discount = 0;
+      alert("Invalid coupon code");
+    }
+    showCart();
+  }
+
+  // =====================
+  // SYNC CART TO LOCALSTORAGE + SERVER (optional)
+  // =====================
+  function syncCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showCart();
+    // OPTIONAL: send fetch('/cart/update', ...) to save server-side too
+  }
+
+  // First render
+  showCart();
+</script>
+
+</body>
+</html>

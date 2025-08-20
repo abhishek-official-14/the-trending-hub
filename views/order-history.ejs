@@ -1,0 +1,14 @@
+<h1>My Orders</h1>
+<% if (!orders.length) { %><p>No orders yet.</p><% } %>
+<% orders.forEach(o => { %>
+  <div class="card">
+    <div><strong>Order:</strong> <%= o._id %></div>
+    <div><strong>Status:</strong> <%= o.status %></div>
+    <div><strong>Total:</strong> ₹<%= o.total %></div>
+    <ul>
+      <% o.items.forEach(i => { %>
+        <li><%= i.title %> x <%= i.qty %> = ₹<%= i.qty * i.price %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% }) %>

@@ -1,0 +1,15 @@
+<div class="grid" style="grid-template-columns: 1fr 1fr;">
+  <div>
+    <img src="<%= (p.images && p.images[0]) || '/images/placeholder.png' %>" alt="<%= p.title %>" style="width:100%; border-radius:12px;" />
+  </div>
+  <div>
+    <h1><%= p.title %></h1>
+    <p><%= p.description %></p>
+    <p class="price">₹<%= p.price %> <span style="text-decoration:line-through; color:#888;">₹<%= p.mrp || p.price %></span></p>
+    <form action="/cart/add" method="post">
+      <input type="hidden" name="productId" value="<%= p._id %>"/>
+      <input type="number" name="qty" min="1" value="1" />
+      <button>Add to Cart</button>
+    </form>
+  </div>
+</div>

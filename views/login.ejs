@@ -1,0 +1,10 @@
+<h1>Login</h1>
+<% if (typeof error !== 'undefined') { %><p style="color:red;"><%= error %></p><% } %>
+<form method="post" action="/login">
+  <label>Email</label><br/>
+  <input name="email" type="email" required /><br/>
+  <label>Password</label><br/>
+  <input name="password" type="password" required /><br/><br/>
+  <button>Login</button>
+</form>
+<p>New here? <a href="/signup">Create account</a></p>

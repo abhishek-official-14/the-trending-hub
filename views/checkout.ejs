@@ -1,0 +1,23 @@
+<h1>Checkout</h1>
+<h3>Order Summary</h3>
+<ul>
+  <% cart.forEach(i => { %>
+    <li><%= i.title %> x <%= i.qty %> = ₹<%= i.price * i.qty %></li>
+  <% }) %>
+</ul>
+<p>Subtotal: ₹<%= subtotal %> | Tax: ₹<%= tax %> | Shipping: ₹<%= shipping %> | <strong>Total: ₹<%= total %></strong></p>
+<h3>Shipping Address</h3>
+<form method="post" action="/checkout">
+  <input name="name" placeholder="Full Name" required /><br/>
+  <input name="phone" placeholder="Phone" required /><br/>
+  <input name="line1" placeholder="Address line 1" required /><br/>
+  <input name="line2" placeholder="Address line 2" /><br/>
+  <input name="city" placeholder="City" required /><br/>
+  <input name="state" placeholder="State" required /><br/>
+  <input name="pincode" placeholder="Pincode" required /><br/>
+  <label>Payment:</label>
+  <select name="paymentMethod">
+    <option value="COD">Cash on Delivery</option>
+  </select><br/><br/>
+  <button>Place Order</button>
+</form>

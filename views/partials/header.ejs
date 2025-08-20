@@ -1,0 +1,18 @@
+<header class="navbar">
+  <div>
+    <a href="/"><strong>TheTrendingHub</strong></a>
+    <a href="/products">Products</a>
+    <% if (user && user.role === 'admin') { %><a href="/admin">Admin</a><% } %>
+  </div>
+  <div>
+    <a href="/cart">Cart (<span><%= cartCount %></span>)</a>
+    <% if (user) { %>
+      <span class="badge">Hi, <%= user.name.split(' ')[0] %></span>
+      <a href="/order-history">Orders</a>
+      <form style="display:inline" action="/logout" method="post"><button>Logout</button></form>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+    <% } %>
+  </div>
+</header>

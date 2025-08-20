@@ -1,0 +1,12 @@
+<h1>Edit Product</h1>
+<form method="post" action="/admin/products/<%= p._id %>">
+  <input name="title" value="<%= p.title %>" required /><br/>
+  <input name="price" type="number" value="<%= p.price %>" required /><br/>
+  <input name="mrp" type="number" value="<%= p.mrp %>" /><br/>
+  <input name="brand" value="<%= p.brand %>" /><br/>
+  <input name="category" value="<%= p.category %>" /><br/>
+  <textarea name="description"><%= p.description %></textarea><br/>
+  <input name="images" value="<%= (p.images||[]).join(', ') %>" /><br/>
+  <label><input type="checkbox" name="active" <%= p.active ? 'checked' : '' %> /> Active</label><br/>
+  <button>Save</button>
+</form>

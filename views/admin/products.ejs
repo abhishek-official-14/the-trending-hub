@@ -1,0 +1,16 @@
+<h1>Admin - Products</h1>
+<p><a href="/admin/products/new"><button>New Product</button></a></p>
+<table style="width:100%; border-collapse:collapse;">
+  <tr><th align="left">Title</th><th>Price</th><th>Active</th><th></th></tr>
+  <% items.forEach(p => { %>
+    <tr>
+      <td><a href="/product/<%= p._id %>"><%= p.title %></a></td>
+      <td>₹<%= p.price %></td>
+      <td><%= p.active ? 'Yes' : 'No' %></td>
+      <td>
+        <a href="/admin/products/<%= p._id %>/edit"><button>Edit</button></a>
+        <form method="post" action="/admin/products/<%= p._id %>/delete" style="display:inline"><button>Delete</button></form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
