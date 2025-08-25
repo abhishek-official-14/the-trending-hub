@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>The Trending Hub</title>
   <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 </head>
+
 <body>
   <header>
-    <h1>🛍 The Trending Hub</h1>
+    <!-- <h1>🛍 The Trending Hub</h1> -->
     <nav>
+      <a href="/" class="logo">Thetredinghub</a>
       <a href="/">Home</a>
       <a href="/products">Products</a>
+      <a href="/wishlist">Wishlist</a>
       <a href="/cart">Cart</a>
+      <a href="/checkout">Checkout</a>
+      <a href="/order-history">Order History</a>
+      <a href="/track">Track Order</a>
+      <a href="/signup">Signup</a>
+      <a href="/login">Login</a>
+      <a href="/contact">Contact</a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search products..." />
+        <button onclick="searchProduct()">🔍</button>
+      </div>
     </nav>
   </header>
 
@@ -18,8 +39,85 @@
     <%- body %>
   </main>
 
-  <footer>
-    <p>© 2025 The Trending Hub</p>
-  </footer>
+  <!-- footer -->
+  <footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>Connect With Us</h4>
+      <p>Follow us for offers, launches & updates</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <div class="newsletter">
+        <label for="newsletterEmail">Subscribe to Newsletter</label>
+        <div class="newsletter-row">
+          <input id="newsletterEmail" type="email" placeholder="Enter your email" />
+          <button onclick="subscribeNewsletter()">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">About Thetredinghub</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Corporate Information</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Payments</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Cancellation & Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Policy</h4>
+      <ul>
+        <li><a href="#">Return Policy</a></li>
+        <li><a href="#">Terms Of Use</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Grievance Redressal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <address>
+        Thetredinghub Internet Pvt. Ltd.<br />
+        123 Main Street, YourCity, 000000<br />
+        India
+      </address>
+      <p>Email: support@thetredinghub.com</p>
+      <p>Phone: +91-00000-00000</p>
+    </div>
+  </div>
+  <div class="footer-mid">
+    <div class="footer-links-row">
+      <a href="#">Become a Seller</a>
+      <a href="#">Advertise</a>
+      <a href="#">Gift Cards</a>
+      <a href="#">Help Center</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="year"></span> Thetredinghub. All rights reserved.</p>
+    <div class="payments">
+      <span class="pay-pill">Visa</span>
+      <span class="pay-pill">Mastercard</span>
+      <span class="pay-pill">UPI</span>
+      <span class="pay-pill">NetBanking</span>
+      <span class="pay-pill">COD</span>
+    </div>
+  </div>
+</footer>
+  
 </body>
+
 </html>
