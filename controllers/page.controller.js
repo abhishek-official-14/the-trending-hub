@@ -56,7 +56,7 @@ export const signup = async (req, res) => {
     email: user.email,
     role: user.role,
   };
-  res.redirect("/");
+  res.redirect("/login");
 };
 
 // export const login = async (req,res) => {
